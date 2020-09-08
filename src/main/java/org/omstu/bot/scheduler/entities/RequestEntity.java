@@ -7,10 +7,10 @@ import lombok.Data;
 @Builder
 public class RequestEntity {
 
-    Integer group;
-    String firstName;
-    String lastName;
-    Long chatId;
+    private Integer group;
+    private String firstName;
+    private String lastName;
+    private Long chatId;
 
 }
 

@@ -24,9 +24,8 @@ public class SubscribeCallbackHandler implements CallbackHandler {
                 .group(GroupBuilder.setGroup(data[1]))
                 .build();
         if (requestEntity.getGroup().equals(000)) {
-            return MessageBuilder.buildMessage(requestEntity.getChatId(), "reply.query.failed");
+            return MessageBuilder.buildMessage(requestEntity.getChatId(), "I cannot process your request. Your group isn't exist.");
         }
-
 
     }
 
