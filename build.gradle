@@ -27,6 +27,7 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	compile group: 'org.telegram', name: 'telegrambots-spring-boot-starter', version: '4.4.0.2'
 }
 
 test {
