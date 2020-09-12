@@ -1,8 +1,5 @@
 package org.omstu.bot.scheduler.entities;
 
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -23,7 +20,7 @@ public class ScheduleEntity {
     public void setBeginLesson(String beginLesson) {
         this.beginLesson = beginLesson;
     }
-    
+
     public String getAuditorium() {
         return auditorium;
     }
