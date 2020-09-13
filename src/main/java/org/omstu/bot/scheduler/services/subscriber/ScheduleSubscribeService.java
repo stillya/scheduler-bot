@@ -19,7 +19,7 @@ public class ScheduleSubscribeService {
 
     private LectureFinderService lectureFinder;
     private TaskRepository taskRepository;
-    private final TaskScheduler taskScheduler;
+    private TaskScheduler taskScheduler;
 
     @Lookup("launcherTask")
     public LauncherTask getLauncherTask() {
