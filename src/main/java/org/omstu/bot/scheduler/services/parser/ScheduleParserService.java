@@ -18,7 +18,7 @@ public class ScheduleParserService {
     @Value("schedule.OMSTU")
     private String scheduleUrl;
 
-    public ScheduleEntity[] parse(Long numberOfGroup, String start, String end) {
+    public ScheduleEntity[] parse(Integer numberOfGroup, String start, String end) {
         MessageFormat.format(scheduleUrl, numberOfGroup, start, end);
         ResponseEntity<ScheduleEntity[]> response = restTemplate.getForEntity(scheduleUrl, ScheduleEntity[].class);
         ScheduleEntity[] schedule = response.getBody();

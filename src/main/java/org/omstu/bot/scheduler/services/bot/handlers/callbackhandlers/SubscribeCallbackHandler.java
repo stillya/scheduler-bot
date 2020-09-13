@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.omstu.bot.scheduler.entities.RequestEntity;
 import org.omstu.bot.scheduler.services.bot.implementation.HandlerEventType;
 import org.omstu.bot.scheduler.services.bot.intefaces.CallbackHandler;
+import org.omstu.bot.scheduler.services.subscriber.ScheduleSubscribeService;
 import org.omstu.bot.scheduler.utils.GroupBuilder;
 import org.omstu.bot.scheduler.utils.MessageBuilder;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 @Service
 @AllArgsConstructor
 public class SubscribeCallbackHandler implements CallbackHandler {
+
+    private ScheduleSubscribeService scheduleSubscribeService;
 
     @Override
     public SendMessage handle(CallbackQuery query) {
@@ -26,7 +29,7 @@ public class SubscribeCallbackHandler implements CallbackHandler {
         if (requestEntity.getGroup().equals(000)) {
             return MessageBuilder.buildMessage(requestEntity.getChatId(), "I cannot process your request. Your group isn't exist.");
         }
-
+        return this.scheduleSubscribeService.subscribe(requestEntity);
     }
 
     @Override

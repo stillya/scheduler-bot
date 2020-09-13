@@ -12,6 +12,15 @@ public class ScheduleEntity {
     private String kindOfWork;
     private String lecturer;
     private String auditorium;
+    private String date;
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
 
     public String getBeginLesson() {
         return beginLesson;
@@ -69,4 +78,11 @@ public class ScheduleEntity {
         this.lecturer = lecturer;
     }
 
+    @Override
+    public String toString() {
+        return "ScheduleEntity{" + "beginLesson='" + beginLesson + '\'' + ", dayOfWeekString='" + dayOfWeekString +
+                '\'' + ", discipline='" + discipline + '\'' + ", endLesson='" + endLesson + '\'' + ", kindOfWork='" +
+                kindOfWork + '\'' + ", lecturer='" + lecturer + '\'' + ", auditorium='" + auditorium + '\'' +
+                ", date='" + date + '\'' + '}';
+    }
 }
