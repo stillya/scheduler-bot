@@ -34,7 +34,7 @@ public class ScheduleSubscribeService {
         task.setGroup(request.getGroup());
         task.setIsFinished(false);
 
-        if (!this.taskRepository.findByChatId(task.getChatId()).getIsFinished()) {
+        if (this.taskRepository.findByChatId(task.getChatId()).getIsFinished()) {
             return MessageBuilder.buildMessage(task.getChatId(), "You're already subscribe");
         }
         this.taskRepository.save(task);
