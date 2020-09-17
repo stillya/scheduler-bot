@@ -12,7 +12,7 @@ public class SchedulerBotApplication {
 	public static void main(String[] args) {
 		ApiContextInitializer.init();
 
-		SpringApplication.run(SchedulerBotApplication.class, args);
+		SpringApplication.run(SchedulerBotApplication.class, args).start();
 	}
 
 }

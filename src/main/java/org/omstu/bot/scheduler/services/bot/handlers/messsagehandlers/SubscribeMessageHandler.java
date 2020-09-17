@@ -1,6 +1,6 @@
 package org.omstu.bot.scheduler.services.bot.handlers.messsagehandlers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.omstu.bot.scheduler.entities.RequestEntity;
 import org.omstu.bot.scheduler.services.bot.implementation.HandlerEventType;
 import org.omstu.bot.scheduler.services.bot.intefaces.MessageHandler;
@@ -12,10 +12,10 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SubscribeMessageHandler implements MessageHandler {
 
-    private ScheduleSubscribeService scheduleSubscribeService;
+    private final ScheduleSubscribeService scheduleSubscribeService;
 
     // TODO: Add exception handling
     @Override

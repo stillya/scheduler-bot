@@ -3,7 +3,7 @@ package org.omstu.bot.scheduler.services.bot.handlers;
 import java.util.List;
 import java.util.Optional;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.omstu.bot.scheduler.services.bot.implementation.HandlerEventType;
 import org.omstu.bot.scheduler.services.bot.implementation.HandlerType;
 import org.omstu.bot.scheduler.services.bot.intefaces.MessageHandler;
@@ -15,10 +15,10 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MessageUpdateHandler implements UpdateHandler {
 
-    List<MessageHandler> handlers;
+    private final List<MessageHandler> handlers;
 
     @Override
     public HandlerType getHandlerType() {

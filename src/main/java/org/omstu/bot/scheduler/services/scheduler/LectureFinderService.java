@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.omstu.bot.scheduler.entities.ScheduleEntity;
 import org.omstu.bot.scheduler.entities.TaskEntity;
 import org.omstu.bot.scheduler.services.parser.ScheduleParserService;
@@ -13,10 +13,10 @@ import org.omstu.bot.scheduler.utils.DateUtil;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LectureFinderService {
 
-    ScheduleParserService parser;
+    private final ScheduleParserService parser;
 
     public TaskEntity find(Integer group) {
         try {

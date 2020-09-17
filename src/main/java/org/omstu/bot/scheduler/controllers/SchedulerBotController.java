@@ -1,6 +1,6 @@
 package org.omstu.bot.scheduler.controllers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.omstu.bot.scheduler.services.bot.SchedulerTelegramBot;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,10 +9,10 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SchedulerBotController {
 
-    SchedulerTelegramBot schedulerTelegramBot;
+    private final SchedulerTelegramBot schedulerTelegramBot;
 
     @PostMapping(path = "/webhook")
     public BotApiMethod onUpdateReceived(@RequestBody Update update) {

@@ -1,5 +1,7 @@
 package org.omstu.bot.scheduler.services.crud;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import org.omstu.bot.scheduler.configuration.TaskMapper;
 import org.omstu.bot.scheduler.entities.TaskEntity;
@@ -42,7 +44,9 @@ public class TaskCrudService implements TaskRepository {
     @Override
     public TaskEntity findByChatId(Long id) {
         try {
-            return (TaskEntity) this.jdbcTemplate.queryForObject("select * from task where task.chatid = ?", new Object[]{id}, new TaskMapper());
+            return (TaskEntity) this.jdbcTemplate.queryForObject("select * from task where task.chatid = ?",
+                    new Object[]{id},
+                    new TaskMapper());
         } catch (Exception e) {
             return null;
         }
@@ -51,5 +55,10 @@ public class TaskCrudService implements TaskRepository {
     @Override
     public void deleteByChatId(Long id) {
         this.jdbcTemplate.update("delete from task where task.chatid = ?", id);
+    }
+
+    @Override
+    public List<TaskEntity> findAll() {
+        return this.jdbcTemplate.query("select * from task", new TaskMapper());
     }
 }
