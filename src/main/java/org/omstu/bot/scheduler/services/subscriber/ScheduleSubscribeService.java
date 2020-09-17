@@ -37,7 +37,7 @@ public class ScheduleSubscribeService {
         TaskEntity oldTask = this.taskRepository.findByChatId(task.getChatId());
 
         if (oldTask != null && oldTask.getIsFinished()) {
-            return MessageBuilder.buildMessage(task.getChatId(), "You're already subscribe");
+            return MessageBuilder.buildMessage(task.getChatId(), "You're already subscribe!");
         }
         this.taskRepository.save(task);
 
@@ -45,7 +45,7 @@ public class ScheduleSubscribeService {
         launcherTask.setChatId(task.getChatId());
         this.taskScheduler.schedule(launcherTask, CronUtil.toCronTrigger(task.getBeginLesson()));
 
-        return MessageBuilder.buildMessage(task.getChatId(), "Subscribe!");
+        return MessageBuilder.buildMessage(task.getChatId(), "Subscribed!");
     }
 
 }

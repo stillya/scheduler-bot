@@ -24,10 +24,10 @@ public class SubscribeCallbackHandler implements CallbackHandler {
                 .chatId(query.getMessage().getChatId())
                 .firstName(query.getFrom().getFirstName())
                 .lastName(query.getFrom().getLastName())
-                .group(GroupBuilder.setGroup(data[1]))
+                .group(GroupBuilder.setGroup(data[1].toUpperCase()))
                 .build();
         if (requestEntity.getGroup().equals(000)) {
-            return MessageBuilder.buildMessage(requestEntity.getChatId(), "I cannot process your request. Your group isn't exist.");
+            return MessageBuilder.buildMessage(requestEntity.getChatId(), "I cannot process your request. Your group isn't exist in system." + '\n' + "If you wanna add your group, ask @Elite_Telegram.");
         }
         return this.scheduleSubscribeService.subscribe(requestEntity);
     }

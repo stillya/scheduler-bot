@@ -3,7 +3,6 @@ package org.omstu.bot.scheduler.services.bot.handlers.messsagehandlers;
 import lombok.AllArgsConstructor;
 import org.omstu.bot.scheduler.entities.RequestEntity;
 import org.omstu.bot.scheduler.services.bot.implementation.HandlerEventType;
-import org.omstu.bot.scheduler.services.bot.implementation.HandlerType;
 import org.omstu.bot.scheduler.services.bot.intefaces.MessageHandler;
 import org.omstu.bot.scheduler.services.subscriber.ScheduleSubscribeService;
 import org.omstu.bot.scheduler.utils.GroupBuilder;
@@ -27,11 +26,11 @@ public class SubscribeMessageHandler implements MessageHandler {
                     .chatId(message.getChat().getId())
                     .firstName(message.getFrom().getFirstName())
                     .lastName(message.getFrom().getLastName())
-                    .group(GroupBuilder.setGroup(data[1].trim()))
+                    .group(GroupBuilder.setGroup(data[1].trim().toUpperCase()))
                     .build();
             if (requestEntity.getGroup().equals(000)) {
                 return MessageBuilder.buildMessage(requestEntity.getChatId(),
-                        "I cannot process your request. Your group isn't exist.");
+                        "I cannot process your request. Your group isn't exist in system." + '\n' + "If you wanna add your group, ask @Elite_Telegram.");
             }
             return this.scheduleSubscribeService.subscribe(requestEntity);
         } catch (Exception e) {

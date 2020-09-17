@@ -15,6 +15,7 @@ public class SchedulerBotController {
     SchedulerTelegramBot schedulerTelegramBot;
 
     @PostMapping(path = "/webhook")
-    public BotApiMethod onUpdateReceived(@RequestBody Update update) { return this.schedulerTelegramBot.onWebhookUpdateReceived(update);
+    public BotApiMethod onUpdateReceived(@RequestBody Update update) {
+        return this.schedulerTelegramBot.onWebhookUpdateReceived(update);
     }
 }

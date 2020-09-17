@@ -4,9 +4,7 @@ import java.util.Optional;
 
 import org.omstu.bot.scheduler.services.bot.implementation.HandlerDecider;
 import org.omstu.bot.scheduler.services.bot.intefaces.UpdateHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;

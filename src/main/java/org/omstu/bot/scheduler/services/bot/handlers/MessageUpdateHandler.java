@@ -39,14 +39,14 @@ public class MessageUpdateHandler implements UpdateHandler {
 
                 return messageHandler.map(handler -> handler.handle(message)).
                         orElse(MessageBuilder.buildMessage(message.getChatId(),
-                                "I cannot process your request. Command isn't right"));
+                                "I cannot process your request. Command isn't right. Please, read helper!"));
             } else {
                 Optional<MessageHandler> queryHandler = handlers.stream().
-                        filter(handler -> handler.getType().equals(HandlerEventType.MENU)).findFirst();
+                        filter(handler -> handler.getType().equals(HandlerEventType.HELP)).findFirst();
                 return queryHandler.get().handle(message);
             }
         } catch (Exception e) {
-            return MessageBuilder.buildMessage(update.getMessage().getChatId(), "I can't handle your message");
+            return MessageBuilder.buildMessage(update.getMessage().getChatId(), "I can't handle your message. Please, read helper!");
         }
     }
 }
