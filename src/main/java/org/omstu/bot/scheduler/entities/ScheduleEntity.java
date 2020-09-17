@@ -80,9 +80,10 @@ public class ScheduleEntity {
 
     @Override
     public String toString() {
-        return "ScheduleEntity{" + "beginLesson='" + beginLesson + '\'' + ", dayOfWeekString='" + dayOfWeekString +
-                '\'' + ", discipline='" + discipline + '\'' + ", endLesson='" + endLesson + '\'' + ", kindOfWork='" +
-                kindOfWork + '\'' + ", lecturer='" + lecturer + '\'' + ", auditorium='" + auditorium + '\'' +
-                ", date='" + date + '\'' + '}';
+        return "------LECTURE IS COMING------" + '\n' + "Discipline: " + discipline + '\n' + "Day of Week: " +
+                dayOfWeekString + '\n' + "Kind of Work: " + kindOfWork + '\n' + "Lecturer: " + lecturer + '\n' +
+                "Begin of Lesson: " + beginLesson + '\n' + "End Of Lesson: " + endLesson + '\n' + "Date: " + date +
+                '\n' + "Auditorium: " + auditorium + '\n' + "----------------------------------";
+
     }
 }

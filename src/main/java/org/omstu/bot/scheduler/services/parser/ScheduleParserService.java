@@ -15,12 +15,12 @@ public class ScheduleParserService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("schedule.OMSTU")
+    @Value("${schedule.OMSTU}")
     private String scheduleUrl;
 
     public ScheduleEntity[] parse(Integer numberOfGroup, String start, String end) {
-        MessageFormat.format(scheduleUrl, numberOfGroup, start, end);
-        ResponseEntity<ScheduleEntity[]> response = restTemplate.getForEntity(scheduleUrl, ScheduleEntity[].class);
+        String formatUrl = MessageFormat.format(scheduleUrl, numberOfGroup, start, end);
+        ResponseEntity<ScheduleEntity[]> response = restTemplate.getForEntity(formatUrl, ScheduleEntity[].class);
         ScheduleEntity[] schedule = response.getBody();
         return schedule;
     }

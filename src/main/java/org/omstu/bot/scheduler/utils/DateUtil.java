@@ -16,7 +16,7 @@ public class DateUtil {
 
     public static Date fromString(String date, String time) throws ParseException {
         String dateInString = date + '/' + time;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy.hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd/hh:mm");
         Date parsedDate = formatter.parse(dateInString);
         return parsedDate;
     }

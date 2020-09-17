@@ -38,16 +38,24 @@ public class LectureFinderService {
     }
 
     private ScheduleEntity[] findNearestLectures(Integer group) {
-        int size;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-        String date = dateFormat.format(new Date());
-        while (true) {
-            ScheduleEntity[] lectures = this.parser.parse(group, date, date);
-            size = lectures.length;
-            date = dateFormat.format(DateUtil.addDays(new Date(), 1));
-            if (size > 0) {
-                return lectures;
+        try {
+            int size;
+            DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+            String date = dateFormat.format(new Date());
+            while (true) {
+                ScheduleEntity[] lectures = this.parser.parse(group, date, date);
+                size = lectures.length;
+                if (DateUtil.fromString(lectures[size - 1].getDate(), lectures[size - 1].getBeginLesson())
+                        .before(new Date())) {
+                    size = 0;
+                }
+                date = dateFormat.format(DateUtil.addDays(new Date(), 1));
+                if (size > 0) {
+                    return lectures;
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
     }
 }

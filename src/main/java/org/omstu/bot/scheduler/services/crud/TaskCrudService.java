@@ -1,6 +1,7 @@
 package org.omstu.bot.scheduler.services.crud;
 
 import lombok.AllArgsConstructor;
+import org.omstu.bot.scheduler.configuration.TaskMapper;
 import org.omstu.bot.scheduler.entities.TaskEntity;
 import org.omstu.bot.scheduler.repositories.TaskRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +18,7 @@ public class TaskCrudService implements TaskRepository {
         TaskEntity oldTask = this.findByChatId(task.getChatId());
         if (oldTask != null) {
             this.jdbcTemplate.update(
-                    "update task set beginLesson = ?, firstName = ?, lastName = ?, groupId = ?, content = ?, isFinished = ? where chatId = ?",
+                    "update task set beginlesson = ?, firstname = ?, lastname = ?, groupid = ?, content = ?, isfinished = ? where chatid = ?",
                     task.getBeginLesson(),
                     task.getFirstName(),
                     task.getLastName(),
@@ -27,7 +28,7 @@ public class TaskCrudService implements TaskRepository {
                     task.getChatId());
         } else {
             this.jdbcTemplate.update(
-                    "insert into task(beginLesson, chatId, firstName, lastName, groupId, content, isFinished) values(?, ?, ?, ?, ?, ?, ?)",
+                    "insert into task(beginlesson, chatid, firstname, lastname, groupid, content, isfinished) values(?, ?, ?, ?, ?, ?, ?)",
                     task.getBeginLesson(),
                     task.getChatId(),
                     task.getFirstName(),
@@ -40,11 +41,15 @@ public class TaskCrudService implements TaskRepository {
 
     @Override
     public TaskEntity findByChatId(Long id) {
-        return this.jdbcTemplate.queryForObject("select * from task where task.chatId = ?", TaskEntity.class, id);
+        try {
+            return (TaskEntity) this.jdbcTemplate.queryForObject("select * from task where task.chatid = ?", new Object[]{id}, new TaskMapper());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
     public void deleteByChatId(Long id) {
-        this.jdbcTemplate.update("delete from task where task.chatId = ?", id);
+        this.jdbcTemplate.update("delete from task where task.chatid = ?", id);
     }
 }

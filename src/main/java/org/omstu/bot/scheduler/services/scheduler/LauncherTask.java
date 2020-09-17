@@ -16,7 +16,7 @@ public class LauncherTask implements Runnable {
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
-    SchedulerTelegramBot bot;
+    private SchedulerTelegramBot bot;
 
     @Setter
     private Long chatId;
