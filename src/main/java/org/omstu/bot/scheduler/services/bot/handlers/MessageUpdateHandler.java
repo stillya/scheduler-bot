@@ -27,21 +27,26 @@ public class MessageUpdateHandler implements UpdateHandler {
 
     @Override
     public SendMessage handle(Update update) {
-        // TODO: 08.09.2020 Make without checking "/start" string
-        Message message = update.getMessage();
-        String[] data = message.getText().split(",");
+        try {
+            // TODO: 08.09.2020 Make without checking "/start" string
+            Message message = update.getMessage();
+            String data[] = message.getText().split(",");
 
-        if (message.getText() != "/start") {
-            HandlerEventType usersQueryType = HandlerEventType.valueOf(data[0]);
-            Optional<MessageHandler> messageHandler = handlers.stream().
-                    filter(handler -> handler.getType().equals(usersQueryType)).findFirst();
+            if (!message.getText().equals("/start")) {
+                HandlerEventType usersQueryType = HandlerEventType.valueOf(data[0].toUpperCase().trim());
+                Optional<MessageHandler> messageHandler = handlers.stream().
+                        filter(handler -> handler.getType().equals(usersQueryType)).findFirst();
 
-            return messageHandler.map(handler -> handler.handle(message)).
-                    orElse(MessageBuilder.buildMessage(message.getChatId(), "I cannot process your request. Command isn't right"));
-        } else {
-            Optional<MessageHandler> queryHandler = handlers.stream().
-                    filter(handler -> handler.getType().equals(HandlerEventType.MENU)).findFirst();
-            return queryHandler.get().handle(message);
+                return messageHandler.map(handler -> handler.handle(message)).
+                        orElse(MessageBuilder.buildMessage(message.getChatId(),
+                                "I cannot process your request. Command isn't right"));
+            } else {
+                Optional<MessageHandler> queryHandler = handlers.stream().
+                        filter(handler -> handler.getType().equals(HandlerEventType.MENU)).findFirst();
+                return queryHandler.get().handle(message);
+            }
+        } catch (Exception e) {
+            return MessageBuilder.buildMessage(update.getMessage().getChatId(), "I can't handle your message");
         }
     }
 }
