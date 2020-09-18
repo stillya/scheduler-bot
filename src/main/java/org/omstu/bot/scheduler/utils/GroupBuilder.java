@@ -6,6 +6,8 @@ public class GroupBuilder {
         switch (group) {
             case "PIN-201":
                 return 749;
+            case "PIN-202":
+                return 750;
             default:
                 return 000;
         }
