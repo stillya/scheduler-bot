@@ -1,4 +1,4 @@
-CREATE TABLE tasks
+CREATE TABLE task
 (
     beginLesson timestamp,
     chatId bigint,
