@@ -45,7 +45,7 @@ public class ScheduleSubscribeService {
         this.contextStarted = false;
     }
 
-    @Scheduled(fixedDelay = 100000)
+    @Scheduled(fixedDelay = 10000)
     public void scheduleInitialTasks() {
         if (!initialized && contextStarted) {
             List<TaskEntity> tasks = this.taskRepository.findAll();
