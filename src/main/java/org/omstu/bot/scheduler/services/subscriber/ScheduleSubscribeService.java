@@ -68,7 +68,7 @@ public class ScheduleSubscribeService {
 
         TaskEntity oldTask = this.taskRepository.findByChatId(task.getChatId());
 
-        if (oldTask != null && oldTask.getIsFinished()) {
+        if (oldTask != null && !oldTask.getIsFinished()) {
             return MessageBuilder.buildMessage(task.getChatId(), "You're already subscribe!");
         }
         this.taskRepository.save(task);
