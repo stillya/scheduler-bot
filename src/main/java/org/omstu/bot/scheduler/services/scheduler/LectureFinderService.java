@@ -41,15 +41,15 @@ public class LectureFinderService {
         try {
             int size;
             DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-            String date = dateFormat.format(new Date());
+            Date date = new Date();
             while (true) {
-                ScheduleEntity[] lectures = this.parser.parse(group, date, date);
+                ScheduleEntity[] lectures = this.parser.parse(group, dateFormat.format(date), dateFormat.format(date));
                 size = lectures.length;
-                if (DateUtil.fromString(lectures[size - 1].getDate(), lectures[size - 1].getBeginLesson())
+                if (size != 0 && DateUtil.fromString(lectures[size - 1].getDate(), lectures[size - 1].getBeginLesson())
                         .before(new Date())) {
                     size = 0;
                 }
-                date = dateFormat.format(DateUtil.addDays(new Date(), 1));
+                date = DateUtil.addDays(date, 1);
                 if (size > 0) {
                     return lectures;
                 }
