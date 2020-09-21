@@ -7,7 +7,7 @@ import org.springframework.scheduling.support.CronTrigger;
 
 public class CronUtil {
 
-    static final long ONE_MINUTE_IN_MILLIS = 60000;
+    public static final long ONE_MINUTE_IN_MILLIS = 60000;
 
     public static CronTrigger toCronTrigger(Date date) {
         Calendar startDate = Calendar.getInstance();

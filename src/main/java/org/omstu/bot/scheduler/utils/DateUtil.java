@@ -14,6 +14,13 @@ public class DateUtil {
         return cal.getTime();
     }
 
+    public static Date addMinutes(Date date, int minutes) {
+        Calendar cal = Calendar.getInstance();
+        Long newDate = date.getTime() + (minutes * CronUtil.ONE_MINUTE_IN_MILLIS);
+        cal.setTime(new Date(newDate));
+        return cal.getTime();
+    }
+
     public static Date fromString(String date, String time) throws ParseException {
         String dateInString = date + '/' + time;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd/hh:mm");

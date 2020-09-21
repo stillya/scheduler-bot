@@ -46,7 +46,7 @@ public class LectureFinderService {
                 ScheduleEntity[] lectures = this.parser.parse(group, dateFormat.format(date), dateFormat.format(date));
                 size = lectures.length;
                 if (size != 0 && DateUtil.fromString(lectures[size - 1].getDate(), lectures[size - 1].getBeginLesson())
-                        .before(new Date())) {
+                        .before(DateUtil.addMinutes(new Date(), 20))) {
                     size = 0;
                 }
                 date = DateUtil.addDays(date, 1);
