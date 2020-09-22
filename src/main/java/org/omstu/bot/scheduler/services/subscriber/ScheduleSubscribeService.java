@@ -1,5 +1,6 @@
 package org.omstu.bot.scheduler.services.subscriber;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.omstu.bot.scheduler.repositories.TaskRepository;
 import org.omstu.bot.scheduler.services.scheduler.LauncherTask;
 import org.omstu.bot.scheduler.services.scheduler.LectureFinderService;
 import org.omstu.bot.scheduler.utils.CronUtil;
+import org.omstu.bot.scheduler.utils.DateUtil;
 import org.omstu.bot.scheduler.utils.MessageBuilder;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.context.event.ContextStartedEvent;
@@ -50,6 +52,12 @@ public class ScheduleSubscribeService {
         if (!initialized && contextStarted) {
             List<TaskEntity> tasks = this.taskRepository.findAll();
             for (TaskEntity t : tasks) {
+                if (this.isExpired(t)) {
+                    TaskEntity newTask = this.lectureFinder.find(t.getGroup());
+                    t.setBeginLesson(newTask.getBeginLesson());
+                    t.setContent(newTask.getContent());
+                    this.taskRepository.save(t);
+                }
                 LauncherTask launcherTask = this.getLauncherTask();
                 launcherTask.setChatId(t.getChatId());
                 this.taskScheduler.schedule(launcherTask, CronUtil.toCronTrigger(t.getBeginLesson()));
@@ -78,6 +86,14 @@ public class ScheduleSubscribeService {
         this.taskScheduler.schedule(launcherTask, CronUtil.toCronTrigger(task.getBeginLesson()));
 
         return MessageBuilder.buildMessage(task.getChatId(), "Subscribed!");
+    }
+
+    private boolean isExpired(TaskEntity task) {
+        if (task.getBeginLesson().before(DateUtil.addMinutes(new Date(), 20))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
