@@ -16,7 +16,6 @@ public class TaskEntity {
     private Integer group;
     private String subGroup;
     private String content;
-
     private Boolean isFinished;
 
 }
