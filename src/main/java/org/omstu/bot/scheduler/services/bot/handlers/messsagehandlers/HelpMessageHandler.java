@@ -14,9 +14,9 @@ public class HelpMessageHandler implements MessageHandler {
     public SendMessage handle(Message message) {
         String helpMenu = "-----------HELP-----------" + '\n' +
                 "This bot will send you a notification about lecture 20 minutes before start" + '\n' +
-                "--------HOW TO USE IT?-------" + '\n' + "1. SUBSCRIBE(Any register): subscribe , <Number of Group> " +
+                "--------HOW TO USE IT?-------" + '\n' + "1. SUBSCRIBE(Any register): subscribe , <Number of Group>/<Subgroup> " +
                 '\n' + "2. UNSUBSCRIBE(Any register): unsubscribe" + '\n' + "3. HELP(Any register): help" + '\n' +
-                "--------EXAMPLES--------" + '\n' + "> subscribe,pin-201" + '\n' + "> unsubscribe " + '\n' + "> help" +
+                "--------EXAMPLES--------" + '\n' + "> subscribe,pin-201/2" + '\n' + "> unsubscribe " + '\n' + "> help" +
                 '\n';
 
         return MessageBuilder.buildMessage(message.getChatId(), helpMenu);
