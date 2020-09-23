@@ -14,7 +14,9 @@ public class TaskEntity {
     private String firstName;
     private String lastName;
     private Integer group;
+    private String subGroup;
     private String content;
+
     private Boolean isFinished;
 
 }

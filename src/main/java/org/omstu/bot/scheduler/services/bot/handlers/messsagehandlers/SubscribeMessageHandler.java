@@ -22,15 +22,18 @@ public class SubscribeMessageHandler implements MessageHandler {
     public SendMessage handle(Message message) {
         try {
             String[] data = message.getText().split(",");
+            String[] group = data[1].trim().toUpperCase().split("/");
             RequestEntity requestEntity = RequestEntity.builder()
                     .chatId(message.getChat().getId())
                     .firstName(message.getFrom().getFirstName())
                     .lastName(message.getFrom().getLastName())
-                    .group(GroupBuilder.setGroup(data[1].trim().toUpperCase()))
+                    .group(GroupBuilder.setGroup(group[0]))
+                    .subGroup(group[1])
                     .build();
-            if (requestEntity.getGroup().equals(000)) {
+            if (requestEntity.getGroup().equals(000) && GroupBuilder.isValidSubGroup(requestEntity.getSubGroup())) {
                 return MessageBuilder.buildMessage(requestEntity.getChatId(),
-                        "I cannot process your request. Your group isn't exist in system." + '\n' + "If you wanna add your group, ask @Elite_Telegram.");
+                        "I cannot process your request. Your group isn't exist in system." + '\n' +
+                                "If you wanna add your group, ask @Elite_Telegram.");
             }
             return this.scheduleSubscribeService.subscribe(requestEntity);
         } catch (Exception e) {

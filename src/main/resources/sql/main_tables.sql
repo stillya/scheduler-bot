@@ -6,5 +6,6 @@ CREATE TABLE task
     lastName TEXT,
     groupId INTEGER,
     content TEXT,
+    subgroup TEXT,
     isFinished BOOLEAN
 );

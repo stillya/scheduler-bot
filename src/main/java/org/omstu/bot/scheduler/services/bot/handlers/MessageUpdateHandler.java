@@ -29,8 +29,13 @@ public class MessageUpdateHandler implements UpdateHandler {
     public SendMessage handle(Update update) {
         try {
             // TODO: 08.09.2020 Make without checking "/start" string
+            if (!update.hasMessage()) {
+                return MessageBuilder.buildMessage(update.getEditedMessage().getFrom().getId().longValue(),
+                        "Message is Empty!");
+            }
+
             Message message = update.getMessage();
-            String data[] = message.getText().split(",");
+            String[] data = message.getText().split(",");
 
             if (!message.getText().equals("/start")) {
                 HandlerEventType usersQueryType = HandlerEventType.valueOf(data[0].toUpperCase().trim());

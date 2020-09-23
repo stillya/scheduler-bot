@@ -2,8 +2,11 @@ package org.omstu.bot.scheduler.services.scheduler;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.omstu.bot.scheduler.entities.ScheduleEntity;
@@ -18,12 +21,17 @@ public class LectureFinderService {
 
     private final ScheduleParserService parser;
 
-    public TaskEntity find(Integer group) {
+    public TaskEntity find(Integer group, String subGroup) {
         try {
-            ScheduleEntity[] schedules = this.findNearestLectures(group);
+            List<ScheduleEntity> schedules;
+            if (subGroup != null) {
+                schedules = this.findLecturesBySubGroup(this.findNearestLectures(group), subGroup);
+            } else {
+                schedules = Arrays.stream(this.findNearestLectures(group)).collect(Collectors.toList());
+            }
             for (ScheduleEntity schedule : schedules) {
                 if (DateUtil.fromString(schedule.getDate(), schedule.getBeginLesson())
-                        .after(Calendar.getInstance().getTime())) {
+                        .after(DateUtil.addMinutes(new Date(), 20))) {
                     return TaskEntity.builder()
                             .beginLesson(DateUtil.fromString(schedule.getDate(), schedule.getBeginLesson()))
                             .content(schedule.toString())
@@ -57,5 +65,15 @@ public class LectureFinderService {
         } catch (Exception e) {
             throw new RuntimeException();
         }
+    }
+
+    private List<ScheduleEntity> findLecturesBySubGroup(ScheduleEntity[] schedule, String subGroup) {
+        List<ScheduleEntity> result = new ArrayList<>();
+        for (ScheduleEntity s : schedule) {
+            if (s.getSubGroup().split("/")[1].equals(subGroup) || s.getSubGroup() == null) {
+                result.add(s);
+            }
+        }
+        return result;
     }
 }

@@ -13,6 +13,15 @@ public class ScheduleEntity {
     private String lecturer;
     private String auditorium;
     private String date;
+    private String subGroup;
+
+    public String getSubGroup() {
+        return subGroup;
+    }
+
+    public void setSubGroup(String subGroup) {
+        this.subGroup = subGroup;
+    }
 
     public void setDate(String date) {
         this.date = date;
@@ -80,10 +89,18 @@ public class ScheduleEntity {
 
     @Override
     public String toString() {
-        return "------LECTURE IS COMING------" + '\n' + "Discipline: " + discipline + '\n' + "Day of Week: " +
-                dayOfWeekString + '\n' + "Kind of Work: " + kindOfWork + '\n' + "Lecturer: " + lecturer + '\n' +
-                "Begin of Lesson: " + beginLesson + '\n' + "End Of Lesson: " + endLesson + '\n' + "Date: " + date +
-                '\n' + "Auditorium: " + auditorium + '\n' + "----------------------------------";
+        if (this.getSubGroup() != null) {
+            return "---------LECTURE IS COMING---------" + '\n' + "Discipline: " + discipline + '\n' + "Day of Week: " +
+                    dayOfWeekString + '\n' + "Kind of Work: " + kindOfWork + '\n' + "Lecturer: " + lecturer + '\n' +
+                    "Begin of Lesson: " + beginLesson + '\n' + "End Of Lesson: " + endLesson + '\n' + "Date: " + date +
+                    '\n' + "Auditorium: " + auditorium + '\n' + "Subgroup: " + subGroup + '\n' +
+                    "----------------------------------";
 
+        } else {
+            return "---------LECTURE IS COMING---------" + '\n' + "Discipline: " + discipline + '\n' + "Day of Week: " +
+                    dayOfWeekString + '\n' + "Kind of Work: " + kindOfWork + '\n' + "Lecturer: " + lecturer + '\n' +
+                    "Begin of Lesson: " + beginLesson + '\n' + "End Of Lesson: " + endLesson + '\n' + "Date: " + date +
+                    '\n' + "Auditorium: " + auditorium + '\n' + "----------------------------------";
+        }
     }
 }

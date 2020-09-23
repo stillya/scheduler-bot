@@ -53,7 +53,7 @@ public class ScheduleSubscribeService {
             List<TaskEntity> tasks = this.taskRepository.findAll();
             for (TaskEntity t : tasks) {
                 if (this.isExpired(t)) {
-                    TaskEntity newTask = this.lectureFinder.find(t.getGroup());
+                    TaskEntity newTask = this.lectureFinder.find(t.getGroup(), t.getSubGroup());
                     t.setBeginLesson(newTask.getBeginLesson());
                     t.setContent(newTask.getContent());
                     this.taskRepository.save(t);
@@ -67,12 +67,13 @@ public class ScheduleSubscribeService {
     }
 
     public SendMessage subscribe(RequestEntity request) {
-        TaskEntity task = this.lectureFinder.find(request.getGroup());
+        TaskEntity task = this.lectureFinder.find(request.getGroup(), request.getSubGroup());
         task.setChatId(request.getChatId());
         task.setFirstName(request.getFirstName());
         task.setLastName(request.getLastName());
         task.setGroup(request.getGroup());
         task.setIsFinished(false);
+        task.setSubGroup(request.getSubGroup());
 
         TaskEntity oldTask = this.taskRepository.findByChatId(task.getChatId());
 

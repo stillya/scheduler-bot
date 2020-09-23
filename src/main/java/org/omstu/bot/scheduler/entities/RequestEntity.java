@@ -11,6 +11,7 @@ public class RequestEntity {
     private String firstName;
     private String lastName;
     private Long chatId;
+    private String subGroup;
 
 }
 
