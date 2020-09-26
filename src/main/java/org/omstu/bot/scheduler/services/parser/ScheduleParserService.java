@@ -20,7 +20,7 @@ public class ScheduleParserService {
 
     public ScheduleEntity[] parse(Integer numberOfGroup, String start, String end) {
         String formatUrl = MessageFormat.format(scheduleUrl, numberOfGroup, start, end);
-        ResponseEntity<ScheduleEntity[]> response = restTemplate.getForEntity(formatUrl, ScheduleEntity[].class);
+        ResponseEntity<ScheduleEntity[]> response = this.restTemplate.getForEntity(formatUrl, ScheduleEntity[].class);
         ScheduleEntity[] schedule = response.getBody();
         return schedule;
     }
