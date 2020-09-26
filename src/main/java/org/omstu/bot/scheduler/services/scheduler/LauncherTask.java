@@ -23,17 +23,20 @@ public class LauncherTask implements Runnable {
 
     @Override
     public void run() {
-        TaskEntity task = this.taskRepository.findByChatId(chatId);
+        TaskEntity task = this.taskRepository.findByChatId(this.chatId);
         if (task.getIsFinished()) {
             return;
         }
-        this.bot.sendMessage(MessageBuilder.buildMessage(chatId, task.getContent()));
+        this.bot.sendMessage(MessageBuilder.buildMessage(this.chatId, task.getContent()));
+
+        this.taskRepository.deleteByChatId(this.chatId);
 
         this.subscribeService.subscribe(RequestEntity.builder()
                 .group(task.getGroup())
                 .lastName(task.getLastName())
                 .firstName(task.getFirstName())
                 .chatId(this.chatId)
+                .subGroup(task.getSubGroup())
                 .build());
 
     }

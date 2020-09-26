@@ -67,7 +67,8 @@ public class ScheduleSubscribeService {
     }
 
     public SendMessage subscribe(RequestEntity request) {
-        TaskEntity task = this.lectureFinder.find(request.getGroup(), request.getSubGroup());
+        TaskEntity task = this.lectureFinder.find(request.getGroup(),
+                request.getSubGroup().trim().toUpperCase().split("/")[1]);
         task.setChatId(request.getChatId());
         task.setFirstName(request.getFirstName());
         task.setLastName(request.getLastName());

@@ -70,7 +70,7 @@ public class LectureFinderService {
     private List<ScheduleEntity> findLecturesBySubGroup(ScheduleEntity[] schedule, String subGroup) {
         List<ScheduleEntity> result = new ArrayList<>();
         for (ScheduleEntity s : schedule) {
-            if (s.getSubGroup().split("/")[1].equals(subGroup) || s.getSubGroup() == null) {
+            if (s.getSubGroup() == null || s.getSubGroup().split("/")[1].equals(subGroup)) {
                 result.add(s);
             }
         }
