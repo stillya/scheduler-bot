@@ -27,19 +27,19 @@ public class TaskCrudService implements TaskRepository {
                     task.getGroup(),
                     task.getContent(),
                     task.getIsFinished(),
-                    task.getChatId(),
-                    task.getSubGroup());
+                    task.getSubGroup(),
+                    task.getChatId());
         } else {
             this.jdbcTemplate.update(
-                    "insert into task(beginlesson, chatid, firstname, lastname, groupid, content, isfinished, subgroup) values(?, ?, ?, ?, ?, ?, ?)",
+                    "insert into task(beginlesson, chatid, firstname, lastname, groupid, content, subgroup, isfinished) values(?, ?, ?, ?, ?, ?, ?, ?)",
                     task.getBeginLesson(),
                     task.getChatId(),
                     task.getFirstName(),
                     task.getLastName(),
                     task.getGroup(),
                     task.getContent(),
-                    task.getIsFinished(),
-                    task.getSubGroup());
+                    task.getSubGroup(),
+                    task.getIsFinished());
         }
     }
 
