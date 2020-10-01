@@ -36,7 +36,7 @@ public class LauncherTask implements Runnable {
                 .lastName(task.getLastName())
                 .firstName(task.getFirstName())
                 .chatId(this.chatId)
-                .subGroup(task.getGroup() + '/' + task.getSubGroup())
+                .subGroup(task.getSubGroup())
                 .build());
 
     }

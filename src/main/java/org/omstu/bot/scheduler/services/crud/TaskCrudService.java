@@ -20,24 +20,26 @@ public class TaskCrudService implements TaskRepository {
         TaskEntity oldTask = this.findByChatId(task.getChatId());
         if (oldTask != null) {
             this.jdbcTemplate.update(
-                    "update task set beginlesson = ?, firstname = ?, lastname = ?, groupid = ?, content = ?, isfinished = ? where chatid = ?",
+                    "update task set beginlesson = ?, firstname = ?, lastname = ?, groupid = ?, content = ?, isfinished = ?, subgroup = ? where chatid = ?",
                     task.getBeginLesson(),
                     task.getFirstName(),
                     task.getLastName(),
                     task.getGroup(),
                     task.getContent(),
                     task.getIsFinished(),
-                    task.getChatId());
+                    task.getChatId(),
+                    task.getSubGroup());
         } else {
             this.jdbcTemplate.update(
-                    "insert into task(beginlesson, chatid, firstname, lastname, groupid, content, isfinished) values(?, ?, ?, ?, ?, ?, ?)",
+                    "insert into task(beginlesson, chatid, firstname, lastname, groupid, content, isfinished, subgroup) values(?, ?, ?, ?, ?, ?, ?)",
                     task.getBeginLesson(),
                     task.getChatId(),
                     task.getFirstName(),
                     task.getLastName(),
                     task.getGroup(),
                     task.getContent(),
-                    task.getIsFinished());
+                    task.getIsFinished(),
+                    task.getSubGroup());
         }
     }
 
