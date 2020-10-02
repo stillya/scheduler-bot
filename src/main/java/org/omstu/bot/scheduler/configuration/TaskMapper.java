@@ -18,6 +18,7 @@ public class TaskMapper implements RowMapper {
                 .group(rs.getInt("groupid"))
                 .isFinished(rs.getBoolean("isfinished"))
                 .lastName(rs.getString("lastname"))
+                .subGroup(rs.getString("subgroup"))
                 .build();
     }
 }
