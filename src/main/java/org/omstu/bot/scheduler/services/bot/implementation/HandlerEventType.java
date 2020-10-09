@@ -5,5 +5,5 @@ public enum HandlerEventType {
     UNSUBSCRIBE,
     MENU,
     HELP,
-    ISSUBSRIBE
+    ISSUBSCRIBE
 }

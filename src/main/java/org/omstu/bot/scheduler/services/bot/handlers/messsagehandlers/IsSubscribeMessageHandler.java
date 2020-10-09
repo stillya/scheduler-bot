@@ -31,6 +31,6 @@ public class IsSubscribeMessageHandler implements MessageHandler {
 
     @Override
     public HandlerEventType getType() {
-        return HandlerEventType.ISSUBSRIBE;
+        return HandlerEventType.ISSUBSCRIBE;
     }
 }
