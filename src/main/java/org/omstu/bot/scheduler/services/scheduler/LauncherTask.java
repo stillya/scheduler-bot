@@ -1,5 +1,6 @@
 package org.omstu.bot.scheduler.services.scheduler;
 
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.omstu.bot.scheduler.entities.RequestEntity;
 import org.omstu.bot.scheduler.entities.TaskEntity;
@@ -9,14 +10,12 @@ import org.omstu.bot.scheduler.services.subscriber.ScheduleSubscribeService;
 import org.omstu.bot.scheduler.utils.MessageBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@RequiredArgsConstructor
 public class LauncherTask implements Runnable {
 
-    @Autowired
-    private ScheduleSubscribeService subscribeService;
-    @Autowired
-    private TaskRepository taskRepository;
-    @Autowired
-    private SchedulerTelegramBot bot;
+    private final ScheduleSubscribeService subscribeService;
+    private final TaskRepository taskRepository;
+    private final SchedulerTelegramBot bot;
 
     @Setter
     private Long chatId;
