@@ -1,5 +1,5 @@
 # scheduler-bot
-This Telegram Bot will help with the schedule in OMSTU.
+This Telegram Bot's helping with the schedule in OMSTU.
 
 Next features:
 
